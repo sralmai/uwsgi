@@ -38,6 +38,7 @@ Definitions
 -  `:lazy`              - load application after worker fork(), default to `false`
 -  `:disable_logging`   - disable uwsgi request logging, default to `false`
 -  `:start_immediately` - decide whether you want to start the service immediately or later manually, default to `true`
+-  `:virtualenv`        - path to virtualenv for uWSGI, default to `nil`
 
 Usage
 =====
@@ -53,6 +54,20 @@ uwsgi_service "myapp" do
   port 8080
   worker_processes 2
   app "flask:app"
+end
+```
+
+To use a virtualenv with uWSGI, define a service like so:
+
+```ruby
+uwsgi_service "myapp" do
+  home_path "/var/www/app"
+  pid_path "/var/run/uwsgi-app.pid"
+  host "127.0.0.1"
+  port 8080
+  worker_processes 2
+  app "flask:app"
+  virtualenv "/var/virtualenv/python3"
 end
 ```
 
